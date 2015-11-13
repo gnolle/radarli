@@ -38,6 +38,8 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
         if (mGoogleApiClient.isConnected() == false)
             mGoogleApiClient.connect();
 
+        PositioningAlarmReceiver.completeWakefulIntent(intent);
+
         return START_NOT_STICKY;
     }
 
