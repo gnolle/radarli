@@ -40,7 +40,6 @@ public class ButzRadar extends AppCompatActivity {
 
         if (positioningIsActive)
             startPositioning();
-
     }
 
     @Override
@@ -150,13 +149,10 @@ public class ButzRadar extends AppCompatActivity {
         positioningScheduler = new PositioningScheduler(this);
         positioningScheduler.startPositioningAlarm();
 
-        if (radarSharedPreferences.getInitialStart()) {
-            String snackBarText = "Standortbestimmung gestartet";
-            Snackbar.make(findViewById(R.id.container), snackBarText, Snackbar.LENGTH_LONG)
-                    .show();
+        String snackBarText = "Standortbestimmung gestartet";
+        Snackbar.make(findViewById(R.id.container), snackBarText, Snackbar.LENGTH_LONG)
+                .show();
 
-            radarSharedPreferences.setInitialStart(false);
-        }
     }
 
     public void initiateMarkerReplace(LocationEntry[] locationEntries) {
