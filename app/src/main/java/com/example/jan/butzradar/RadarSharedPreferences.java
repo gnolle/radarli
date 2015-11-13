@@ -24,6 +24,21 @@ private static final String CLASS_ID = "PREFS";
         this.context = context;
     }
 
+    public boolean getInitialStart() {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        boolean initialStart = settings.getBoolean("initial", true);
+
+        return initialStart;
+    }
+
+    public void setInitialStart(boolean initialStart) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("initial", initialStart);
+
+        editor.commit();
+    }
+
     public boolean getPositioningSetting() {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         boolean positioningSetting = settings.getBoolean("positioning", true);

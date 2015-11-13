@@ -38,8 +38,11 @@ public class ButzRadar extends AppCompatActivity {
 
         positioningIsActive = radarSharedPreferences.getPositioningSetting();
 
-        if (positioningIsActive)
+        if (radarSharedPreferences.getInitialStart()) {
             startPositioning();
+            radarSharedPreferences.setInitialStart(false);
+        }
+
     }
 
     @Override
