@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Radarli</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="set_camera_to_bounds">Zeige Marker</string>
+</resources>
