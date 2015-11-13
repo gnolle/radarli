@@ -31,10 +31,6 @@
         </service>
 
         <service
-            android:name=".DeviceLocationService">
-        </service>
-
-        <service
             android:name=".LocationUploader">
         </service>
 

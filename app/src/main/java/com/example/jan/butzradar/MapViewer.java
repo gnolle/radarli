@@ -32,7 +32,6 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private static final float FOCUS_ZOOM_LEVEL = 16;
 
     private ButzRadar context;
-    private boolean isInitialPosition = true;
     private int markerFocusIndex;
 
     private MapFragment mapFragment;
@@ -115,10 +114,6 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
         createPositionMarkers(locationEntries);
 
-        if (isInitialPosition) {
-            changeCameraToBounds();
-            isInitialPosition = false;
-        }
     }
 
     private void createPositionMarkers(LocationEntry[] locationEntries) {
