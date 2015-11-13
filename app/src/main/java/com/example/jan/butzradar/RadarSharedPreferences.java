@@ -5,6 +5,10 @@ package com.example.jan.butzradar;
  */
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Camera;
+
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by janklostermann on 09.11.15.
@@ -29,6 +33,33 @@ public class RadarSharedPreferences {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("positioning", positioningSetting);
+
+        editor.commit();
+    }
+
+    public CameraPosition getLastCameraPos() {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        double cameraLatitude = settings.getFloat("camera_latitude", 0);
+        double cameraLongitude = settings.getFloat("camera_longitude", 0);
+        float cameraBearing = settings.getFloat("camera_bearing", 0);
+        float cameraTilt = settings.getFloat("camera_tilt", 0);
+        float cameraZoom = settings.getFloat("camera_zoom", 0);
+
+        LatLng cameraLatLng = new LatLng(cameraLatitude, cameraLongitude);
+        CameraPosition cameraPosition = new CameraPosition(cameraLatLng, cameraZoom, cameraTilt, cameraBearing);
+
+        return cameraPosition;
+    }
+
+    public void setLastCameraPos(CameraPosition cameraPosition) {
+
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putFloat("camera_latitude", (float) cameraPosition.target.latitude);
+        editor.putFloat("camera_longitude", (float) cameraPosition.target.longitude);
+        editor.putFloat("camera_bearing", cameraPosition.bearing);
+        editor.putFloat("camera_tilt", cameraPosition.tilt);
+        editor.putFloat("camera_zoom", cameraPosition.zoom);
 
         editor.commit();
     }
