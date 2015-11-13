@@ -38,10 +38,8 @@ public class ButzRadar extends AppCompatActivity {
 
         positioningIsActive = radarSharedPreferences.getPositioningSetting();
 
-        if (radarSharedPreferences.getInitialStart()) {
+        if (positioningIsActive)
             startPositioning();
-            radarSharedPreferences.setInitialStart(false);
-        }
 
     }
 
@@ -152,9 +150,13 @@ public class ButzRadar extends AppCompatActivity {
         positioningScheduler = new PositioningScheduler(this);
         positioningScheduler.startPositioningAlarm();
 
-        String snackBarText = "Standortbestimmung gestartet";
-        Snackbar.make(findViewById(R.id.container), snackBarText, Snackbar.LENGTH_LONG)
-                .show();
+        if (radarSharedPreferences.getInitialStart()) {
+            String snackBarText = "Standortbestimmung gestartet";
+            Snackbar.make(findViewById(R.id.container), snackBarText, Snackbar.LENGTH_LONG)
+                    .show();
+
+            radarSharedPreferences.setInitialStart(false);
+        }
     }
 
     public void initiateMarkerReplace(LocationEntry[] locationEntries) {
