@@ -1,15 +1,8 @@
 package com.example.jan.butzradar;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Camera;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,12 +10,12 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -100,7 +93,12 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
     @Override
     public void onMapReady(GoogleMap map) {
-        initMapOnGermany();
+
+        if (context.radarSharedPreferences.isLastCameraPosSet()) {
+            focusCameraOnCameraPosition(context.radarSharedPreferences.getLastCameraPos());
+        } else {
+            initMapOnGermany();
+        }
 
         context.startLocationPolling();
     }
@@ -198,6 +196,14 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(focusedMarkerPosition, FOCUS_ZOOM_LEVEL));
 
         markerFocusIndex++;
+    }
+
+    public void focusCameraOnCameraPosition(CameraPosition cameraPosition) {
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    public CameraPosition getCameraPos() {
+         return googleMap.getCameraPosition();
     }
 
 }

@@ -6,6 +6,7 @@ package com.example.jan.butzradar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Camera;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class RadarSharedPreferences {
 
+private static final String CLASS_ID = "PREFS";
     private static final String PREFS_NAME = "RadarliPrefs";
     private Context context;
 
@@ -52,9 +54,9 @@ public class RadarSharedPreferences {
     }
 
     public void setLastCameraPos(CameraPosition cameraPosition) {
-
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("camera_pos_set", true);
         editor.putFloat("camera_latitude", (float) cameraPosition.target.latitude);
         editor.putFloat("camera_longitude", (float) cameraPosition.target.longitude);
         editor.putFloat("camera_bearing", cameraPosition.bearing);
@@ -62,6 +64,13 @@ public class RadarSharedPreferences {
         editor.putFloat("camera_zoom", cameraPosition.zoom);
 
         editor.commit();
+    }
+
+    public boolean isLastCameraPosSet() {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        boolean isLastCameraPosSet = settings.getBoolean("camera_pos_set", false);
+
+        return isLastCameraPosSet;
     }
 
 }

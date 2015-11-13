@@ -19,7 +19,7 @@ public class ButzRadar extends AppCompatActivity {
     private MapViewer mapViewer;
     private LocationPollingScheduler locationPollingScheduler;
     private PositioningScheduler positioningScheduler;
-    private RadarSharedPreferences radarSharedPreferences;
+    public RadarSharedPreferences radarSharedPreferences;
     private boolean positioningIsActive = false;
 
     @Override
@@ -173,6 +173,7 @@ public class ButzRadar extends AppCompatActivity {
         Log.i(CLASS_ID, "Location polling stopped.");
 
         radarSharedPreferences.setPositioningSetting(positioningIsActive);
+        radarSharedPreferences.setLastCameraPos(mapViewer.getCameraPos());
     }
 
     private void stopPositioning() {
