@@ -29,7 +29,7 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private static final int MAP_MARKER_PADDING = 150;
     private static final LatLng GERMANY_GEOGRAPHIC_CENTER = new LatLng(51.5167, 10.5);
     private static final float INITIAL_ZOOM_LEVEL = 5.5f;
-    private static final float FOCUS_ZOOM_LEVEL = 16;
+    private static final float FOCUS_ZOOM_LEVEL = 17;
 
     private ButzRadar context;
     private int markerFocusIndex;
@@ -72,8 +72,7 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         snackBarText.append("Letztes Update: ");
         snackBarText.append(dateFormatter.parsedDate);
 
-        Snackbar.make(context.findViewById(R.id.container), snackBarText, Snackbar.LENGTH_LONG)
-                .show();
+        SnackBarBuilder.showSnackBar(snackBarText.toString(), context.findViewById(R.id.container));
 
         return true;
     }
