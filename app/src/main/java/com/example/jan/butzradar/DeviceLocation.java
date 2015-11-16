@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
@@ -23,6 +24,7 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
+    private boolean currentlyPositioning = false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -35,12 +37,31 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
         buildGoogleApiClient();
         createLocationRequest();
 
+        if (!currentlyPositioning) {
+            currentlyPositioning = true;
+            startPositioning();
+        }
+
         if (mGoogleApiClient.isConnected() == false)
             mGoogleApiClient.connect();
 
-        PositioningAlarmReceiver.completeWakefulIntent(intent);
-
         return START_NOT_STICKY;
+    }
+
+    private void startPositioning() {
+
+        if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+
+            buildGoogleApiClient();
+
+            if (!mGoogleApiClient.isConnected() || !mGoogleApiClient.isConnecting()) {
+                mGoogleApiClient.connect();
+            }
+
+        } else {
+            Log.e(CLASS_ID, "Unable to connect to Google Play Services.");
+        }
+
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -68,10 +89,8 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
     @Override
     public void onLocationChanged(Location location) {
         Log.i(CLASS_ID, "Location changed. Accuracy: " + location.getAccuracy());
-        if (location.getAccuracy() < GPS_ACCURACY_THRESHOLD) {
-            startUploading(location);
-            stopLocationUpdates();
-        }
+        startUploading(location);
+        stopLocationUpdates();
     }
 
     private void stopLocationUpdates() {
@@ -95,6 +114,7 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+        stopLocationUpdates();
     }
 
 }

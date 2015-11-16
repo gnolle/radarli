@@ -13,6 +13,6 @@ public class PositioningAlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        startWakefulService(context, new Intent(context, DeviceLocation.class));
+        context.startService(new Intent(context, DeviceLocation.class));
     }
 }

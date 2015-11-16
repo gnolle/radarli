@@ -46,6 +46,10 @@ public class LocationUploader extends IntentService {
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            urlConnection.setConnectTimeout(10000);
+            urlConnection.setReadTimeout(10000);
+
+            Log.i(CLASS_ID, urlConnection.getConnectTimeout() + ", " + urlConnection.getReadTimeout());
 
             String postParameters = locationEntry.getPostData();
 

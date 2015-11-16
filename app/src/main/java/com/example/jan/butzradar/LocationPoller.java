@@ -36,6 +36,8 @@ public class LocationPoller extends IntentService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setUseCaches(false);
             connection.setRequestProperty("Connection", "close");
+            connection.setConnectTimeout(10000);
+            connection.setReadTimeout(10000);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
