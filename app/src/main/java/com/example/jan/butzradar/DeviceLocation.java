@@ -20,11 +20,13 @@ import com.google.android.gms.location.LocationServices;
 public class DeviceLocation extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private final static String CLASS_ID = "DEVICE_LOCATION";
-    private final static float GPS_ACCURACY_THRESHOLD = 500.0f;
+    private final static float GPS_ACCURACY_THRESHOLD = 100.0f;
+    private final static int MAX_LOCATION_UPDATES = 5;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private boolean currentlyPositioning = false;
+    private int numberOfLocationUpdates = 0;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,9 +43,6 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
             currentlyPositioning = true;
             startPositioning();
         }
-
-        if (mGoogleApiClient.isConnected() == false)
-            mGoogleApiClient.connect();
 
         return START_NOT_STICKY;
     }
@@ -88,9 +87,13 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.i(CLASS_ID, "Location changed. Accuracy: " + location.getAccuracy());
-        startUploading(location);
-        stopLocationUpdates();
+        Log.i(CLASS_ID, "Location changed. " + location.toString());
+        numberOfLocationUpdates++;
+
+        if (location.getAccuracy() < GPS_ACCURACY_THRESHOLD || numberOfLocationUpdates >= MAX_LOCATION_UPDATES) {
+            startUploading(location);
+            stopLocationUpdates();
+        }
     }
 
     private void stopLocationUpdates() {

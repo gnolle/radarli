@@ -55,8 +55,8 @@ public class LocationPoller extends IntentService {
             br.close();
             connection.disconnect();
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception exc) {
+            Log.e(CLASS_ID, "Error polling server.");
         }
     }
 

@@ -64,8 +64,8 @@ public class LocationUploader extends IntentService {
 
             urlConnection.disconnect();
 
-        } catch (Exception e) {
-            Log.e(CLASS_ID, e.toString());
+        } catch (Exception exc) {
+            Log.e(CLASS_ID, "Error uploading location to server.");
         }
 
     }
