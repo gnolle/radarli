@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -100,9 +99,6 @@ public class ButzRadar extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.focus_marker:
-                mapViewer.focusCameraOnMarker();
-                return true;
             case R.id.location_toggle:
                 togglePositioning();
                 return true;
@@ -127,7 +123,7 @@ public class ButzRadar extends AppCompatActivity {
         myFab.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                mapViewer.changeCameraToBounds();
+                mapViewer.changeCameraFocus();
             }
 
         });

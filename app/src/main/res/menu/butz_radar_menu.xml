@@ -7,8 +7,4 @@
         android:title="Toggle positioning"
         butzradar:showAsAction="always"/>
 
-    <item android:id="@+id/focus_marker"
-        android:icon="@drawable/ic_center_focus_weak_white_24dp"
-        android:title="Focus marker"
-        butzradar:showAsAction="always"/>
 </menu>

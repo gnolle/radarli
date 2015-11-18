@@ -19,6 +19,6 @@
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
         android:clickable="true"
-        android:src="@drawable/overview_icon" />
+        android:src="@drawable/ic_search_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

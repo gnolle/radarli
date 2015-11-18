@@ -1,9 +1,8 @@
 package com.example.jan.butzradar;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.location.Location;
-import android.support.design.widget.Snackbar;
+import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -37,7 +36,7 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private static final float FOCUS_ZOOM_LEVEL = 17;
 
     private ButzRadar context;
-    private int markerFocusIndex;
+    private int currentFocusIndex;
 
     private MapFragment mapFragment;
     private GoogleMap googleMap;
@@ -207,11 +206,7 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     }
 
 
-    public void changeCameraToBounds() {
-
-        if (positionMarkers.size() == 0)
-            return;
-
+    private void changeCameraToBounds() {
         LatLngBounds.Builder latLngBuilder = new LatLngBounds.Builder();
 
         for (Marker marker : positionMarkers) {
@@ -223,19 +218,25 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, MAP_MARKER_PADDING));
     }
 
-    public void focusCameraOnMarker() {
-        if (positionMarkers == null || positionMarkers.size() == 0)
-            return;
-
-        if (markerFocusIndex > positionMarkers.size() - 1)
-            markerFocusIndex = 0;
-
-        Marker focusedMarker = positionMarkers.get(markerFocusIndex);
+    private void changeCameraToMarker() {
+        Marker focusedMarker = positionMarkers.get(currentFocusIndex);
         LatLng focusedMarkerPosition = focusedMarker.getPosition();
 
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(focusedMarkerPosition, FOCUS_ZOOM_LEVEL));
 
-        markerFocusIndex++;
+        currentFocusIndex++;
+    }
+
+    public void changeCameraFocus() {
+        if (positionMarkers == null || positionMarkers.size() == 0)
+            return;
+
+        if (currentFocusIndex > positionMarkers.size() - 1) {
+            currentFocusIndex = 0;
+            changeCameraToBounds();
+        } else {
+            changeCameraToMarker();
+        }
     }
 
     public void focusCameraOnCameraPosition(CameraPosition cameraPosition) {
