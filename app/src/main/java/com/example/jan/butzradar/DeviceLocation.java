@@ -13,6 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Jan on 08.11.2015.
@@ -93,6 +94,7 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
         if (location.getAccuracy() < GPS_ACCURACY_THRESHOLD || numberOfLocationUpdates >= MAX_LOCATION_UPDATES) {
             startUploading(location);
             stopLocationUpdates();
+            new ReverseGeocoder(this).getAddressFromLocation(new LatLng(location.getLatitude(), location.getLongitude()));
         }
     }
 
