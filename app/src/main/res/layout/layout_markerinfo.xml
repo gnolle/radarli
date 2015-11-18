@@ -4,64 +4,77 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:background="@color/material_white">
+
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/locationIcon"
-            android:src="@drawable/ic_filter_center_focus_black_24dp"
+            android:src="@drawable/ic_public_black_24dp"
+            android:alpha="0.54"
             android:layout_marginLeft="16dp"
             android:layout_centerVertical="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/locationInfo"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentTop="false"
             android:layout_alignParentRight="false"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="72dp"
             android:layout_alignParentLeft="true"
+            android:textColor="#000000"
+            android:alpha="0.87"
             android:textSize="16sp"
-            android:text="Borsigstraße 6b, 38844 Wolfsburg" />
+            android:fontFamily="sans-serif"
+            android:text="Borsigstraße 6b, 38844 Wolfsburg"
+            android:paddingBottom="20dp"
+            android:paddingLeft="72dp"
+            android:paddingTop="16dp"
+            android:textIsSelectable="false" />
     </RelativeLayout>
 
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:background="@color/material_white">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/updateIcon"
-            android:src="@drawable/ic_filter_center_focus_black_24dp"
+            android:src="@drawable/ic_access_time_black_24dp"
+            android:alpha="0.54"
             android:layout_marginLeft="16dp"
             android:layout_centerVertical="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/updateText"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentTop="false"
             android:layout_alignParentRight="false"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="72dp"
             android:layout_alignParentLeft="true"
+            android:textColor="#000000"
+            android:alpha="0.87"
             android:textSize="16sp"
-            android:text="17.11.15 - 16:15 Uhr" />
+            android:fontFamily="sans-serif"
+            android:text="12. Nov 2015 - 16:43 Uhr"
+            android:paddingBottom="20dp"
+            android:paddingLeft="72dp"
+            android:paddingTop="16dp"
+            android:textIsSelectable="false" />
     </RelativeLayout>
 
 </LinearLayout>

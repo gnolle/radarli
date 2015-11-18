@@ -82,16 +82,6 @@ public class ButzRadar extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.butz_radar_menu, menu);
 
-        int positioningIcon;
-
-        if (positioningIsActive()) {
-            positioningIcon = R.drawable.ic_gps_fixed_white_24dp;
-        } else {
-            positioningIcon = R.drawable.ic_gps_off_white_24dp;
-        }
-
-        menu.findItem(R.id.location_toggle).setIcon(positioningIcon);
-
         return super.onCreateOptionsMenu(menu);
     }
 

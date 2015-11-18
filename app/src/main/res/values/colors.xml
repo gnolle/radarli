@@ -19,4 +19,6 @@
     <color name="blue_circle_fill">#112196F3</color>
     <color name="blue_circle_stroke">#222196F3</color>
 
+    <color name="text_color_87">#57000000</color>
+
 </resources>
