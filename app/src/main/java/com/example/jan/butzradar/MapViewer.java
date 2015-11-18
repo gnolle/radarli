@@ -1,7 +1,10 @@
 package com.example.jan.butzradar;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.location.Location;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,6 +14,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -37,11 +42,13 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
     private MapFragment mapFragment;
     private GoogleMap googleMap;
     private List<Marker> positionMarkers;
+    private List<Circle> accuracyCircles;
     private HashMap<String, LocationEntry> markerMap;
 
     public MapViewer(Context context) {
         this.context = (ButzRadar) context;
         positionMarkers = new ArrayList<>();
+        accuracyCircles = new ArrayList<>();
         markerMap = new HashMap<>();
 
         createMap();
@@ -145,10 +152,44 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         MarkerOptions markerOptions = new MarkerOptions().position(markerPosition).icon(markerIcon);
         Marker marker = googleMap.addMarker(markerOptions);
 
+        drawAccuracyCircle(locationEntry);
+
         positionMarkers.add(marker);
 
         markerMap.put(marker.getId(), locationEntry);
 
+    }
+
+    private void drawAccuracyCircle(LocationEntry locationEntry) {
+
+        CircleOptions circleOptions = new CircleOptions();
+
+        circleOptions
+                .radius(locationEntry.accuracy)
+                .center(new LatLng(locationEntry.latitude, locationEntry.longitude))
+                .strokeWidth(3);
+
+        switch (locationEntry.markerColor) {
+            case 0:
+                circleOptions
+                        .strokeColor(ContextCompat.getColor(context, R.color.pink_circle_stroke))
+                        .fillColor(ContextCompat.getColor(context, R.color.pink_circle_fill));
+                break;
+            case 1:
+                circleOptions
+                        .strokeColor(ContextCompat.getColor(context, R.color.blue_circle_stroke))
+                        .fillColor(ContextCompat.getColor(context, R.color.blue_circle_fill));
+                break;
+            default:
+                circleOptions
+                        .strokeColor(ContextCompat.getColor(context, R.color.pink_circle_stroke))
+                        .fillColor(ContextCompat.getColor(context, R.color.pink_circle_fill));
+                break;
+        }
+
+        Circle circle = googleMap.addCircle(circleOptions);
+
+        accuracyCircles.add(circle);
     }
 
     private void deleteMarkers() {
@@ -156,7 +197,12 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
            marker.remove();
         }
 
+        for (Circle circle : accuracyCircles) {
+            circle.remove();
+        }
+
         positionMarkers.clear();
+        accuracyCircles.clear();
         markerMap.clear();
     }
 

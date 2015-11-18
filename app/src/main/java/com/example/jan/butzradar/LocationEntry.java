@@ -13,13 +13,15 @@ public class LocationEntry {
     public double latitude;
     public double longitude;
     public int markerColor;
+    public float accuracy;
 
-    public LocationEntry(String userid, long timestamp, double latitude, double longitude, int markerColor) {
+    public LocationEntry(String userid, long timestamp, double latitude, double longitude, int markerColor, float accuracy) {
         this.userid = userid;
         this.timestamp = timestamp;
         this.latitude = latitude;
         this.longitude = longitude;
         this.markerColor = markerColor;
+        this.accuracy = accuracy;
     }
 
     public String getPostData() {
@@ -45,6 +47,10 @@ public class LocationEntry {
         postData.append(encodeToURIFormat("markerColor"));
         postData.append("=");
         postData.append(encodeToURIFormat(String.valueOf(markerColor)));
+        postData.append("&");
+        postData.append(encodeToURIFormat("accuracy"));
+        postData.append("=");
+        postData.append(encodeToURIFormat(String.valueOf(accuracy)));
 
         return postData.toString();
     }
