@@ -152,7 +152,7 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         MarkerOptions markerOptions = new MarkerOptions().position(markerPosition).icon(markerIcon);
         Marker marker = googleMap.addMarker(markerOptions);
 
-        drawAccuracyCircle(markerPosition);
+        drawAccuracyCircle(locationEntry);
 
         positionMarkers.add(marker);
 
@@ -160,13 +160,34 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
 
     }
 
-    private void drawAccuracyCircle(LatLng location) {
-        Circle circle = googleMap.addCircle(new CircleOptions()
-                .center(location)
-                .radius(50)
-                .strokeColor(ContextCompat.getColor(context, R.color.pink_circle_stroke))
-                .fillColor(ContextCompat.getColor(context, R.color.pink_circle_fill))
-                .strokeWidth(4));
+    private void drawAccuracyCircle(LocationEntry locationEntry) {
+
+        CircleOptions circleOptions = new CircleOptions();
+
+        circleOptions
+                .radius(locationEntry.accuracy)
+                .center(new LatLng(locationEntry.latitude, locationEntry.longitude))
+                .strokeWidth(3);
+
+        switch (locationEntry.markerColor) {
+            case 0:
+                circleOptions
+                        .strokeColor(ContextCompat.getColor(context, R.color.pink_circle_stroke))
+                        .fillColor(ContextCompat.getColor(context, R.color.pink_circle_fill));
+                break;
+            case 1:
+                circleOptions
+                        .strokeColor(ContextCompat.getColor(context, R.color.blue_circle_stroke))
+                        .fillColor(ContextCompat.getColor(context, R.color.blue_circle_fill));
+                break;
+            default:
+                circleOptions
+                        .strokeColor(ContextCompat.getColor(context, R.color.pink_circle_stroke))
+                        .fillColor(ContextCompat.getColor(context, R.color.pink_circle_fill));
+                break;
+        }
+
+        Circle circle = googleMap.addCircle(circleOptions);
 
         accuracyCircles.add(circle);
     }

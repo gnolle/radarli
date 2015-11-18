@@ -35,7 +35,7 @@ public class LocationUploader extends IntentService {
 
         Log.i(CLASS_ID, "accuracy: " + location.getAccuracy() + " lat: " + location.getLatitude() + " lon: " + location.getLongitude());
 
-        LocationEntry locationEntry = new LocationEntry(getResources().getString(R.string.user_id), getCurrentTimestamp(), location.getLatitude(), location.getLongitude(), getResources().getInteger(R.integer.marker_color));
+        LocationEntry locationEntry = new LocationEntry(getResources().getString(R.string.user_id), getCurrentTimestamp(), location.getLatitude(), location.getLongitude(), getResources().getInteger(R.integer.marker_color), location.getAccuracy());
 
         try {
 

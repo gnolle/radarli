@@ -14,5 +14,9 @@
     <color name="material_accent_pink_100">#FF80AB</color>
 
     <color name="pink_circle_fill">#11E91E63</color>
-    <color name="pink_circle_stroke">#33E91E63</color>
+    <color name="pink_circle_stroke">#22E91E63</color>
+
+    <color name="blue_circle_fill">#112196F3</color>
+    <color name="blue_circle_stroke">#222196F3</color>
+
 </resources>
