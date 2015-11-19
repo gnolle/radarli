@@ -3,6 +3,8 @@ package com.example.jan.butzradar;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -79,6 +81,10 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         snackBarText.append(dateFormatter.parsedDate);
 
         SnackBarBuilder.showSnackBar(snackBarText.toString(), context.findViewById(R.id.container));
+
+        FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
+        DialogFragment detailDialog = new DetailDialog();
+        detailDialog.show(ft, "dialog");
 
         return true;
     }
