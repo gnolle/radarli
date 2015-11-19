@@ -10,9 +10,6 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by Jan on 18.11.2015.
- */
 public class ReverseGeocoder {
 
     private final static String CLASS_ID = "GEOCODER";
@@ -23,12 +20,14 @@ public class ReverseGeocoder {
         geocoder = new Geocoder(context, Locale.getDefault());
     }
 
-    public void getAddressFromLocation(LatLng location) {
+    public List<Address> getAddressFromLocation(LatLng location) {
         try {
             addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1);
             Log.i(CLASS_ID, addresses.get(0).toString());
+            return addresses;
         } catch (Exception e) {
             Log.e(CLASS_ID, e.getMessage());
+            return null;
         }
     }
 }

@@ -9,6 +9,7 @@
     android:paddingBottom="8dp">
 
     <RelativeLayout
+        android:id="@+id/locationContainer"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +37,7 @@
             android:alpha="0.87"
             android:textSize="16sp"
             android:fontFamily="sans-serif"
-            android:text="Borsigstraße 6b"
+            android:text="Friedrichstraße 112"
             android:paddingLeft="72dp"
             android:paddingTop="16dp"
             android:paddingBottom="2dp"
@@ -56,7 +57,7 @@
             android:alpha="0.57"
             android:textSize="14sp"
             android:fontFamily="sans-serif"
-            android:text="38844 Wolfsburg"
+            android:text="38855 Wernigerode"
             android:paddingBottom="20dp"
             android:paddingLeft="72dp"
             android:textIsSelectable="false"

@@ -73,17 +73,9 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             return true;
         }
 
-        DateFormatter dateFormatter = new DateFormatter(locationEntry.timestamp);
-
-        StringBuilder snackBarText = new StringBuilder();
-
-        snackBarText.append("Letztes Update: ");
-        snackBarText.append(dateFormatter.parsedDate);
-
-        SnackBarBuilder.showSnackBar(snackBarText.toString(), context.findViewById(R.id.container));
-
         FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
-        DialogFragment detailDialog = new DetailDialog();
+        DetailDialog detailDialog = new DetailDialog();
+        detailDialog.setLocationEntry(locationEntry);
         detailDialog.show(ft, "dialog");
 
         return true;
