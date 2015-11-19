@@ -73,10 +73,12 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
             return true;
         }
 
-        FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
-        DetailDialog detailDialog = new DetailDialog();
-        detailDialog.setLocationEntry(locationEntry);
-        detailDialog.show(ft, "dialog");
+        if (context.getSupportFragmentManager().findFragmentByTag("infodiag") == null) {
+            FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
+            DetailDialog detailDialog = new DetailDialog();
+            detailDialog.setLocationEntry(locationEntry);
+            detailDialog.show(ft, "infodiag");
+        }
 
         return true;
     }
