@@ -62,10 +62,14 @@
             android:paddingLeft="72dp"
             android:textIsSelectable="false"
             android:paddingRight="16dp" />
+
+        <View
+            android:layout_below="@id/locationInfoSubtext"
+            style="@style/Divider" />
+
     </RelativeLayout>
 
-    <View
-        style="@style/Divider" />
+
 
     <RelativeLayout
         android:orientation="vertical"
@@ -119,10 +123,12 @@
             android:paddingLeft="72dp"
             android:textIsSelectable="false"
             android:paddingRight="16dp" />
-    </RelativeLayout>
 
-    <View
-        style="@style/Divider" />
+        <View
+            style="@style/Divider"
+            android:layout_below="@id/travelSubtext"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:orientation="vertical"
