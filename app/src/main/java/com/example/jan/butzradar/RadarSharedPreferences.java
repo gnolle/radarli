@@ -24,17 +24,26 @@ private static final String CLASS_ID = "PREFS";
         this.context = context;
     }
 
-    public boolean getInitialStart() {
+    public boolean isOwnLocationAvailable() {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
-        boolean initialStart = settings.getBoolean("initial", true);
+        boolean ownLocationAvailable = settings.getBoolean("ownLocationAvailable", true);
 
-        return initialStart;
+        return ownLocationAvailable;
     }
 
-    public void setInitialStart(boolean initialStart) {
+    public LatLng getOwnLocation() {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+        double ownLocationLatitude = settings.getFloat("ownLocationLatitude", 0f);
+        double ownLocationLongitude = settings.getFloat("ownLocationLongitude", 0f);
+
+        return new LatLng(ownLocationLatitude, ownLocationLongitude);
+    }
+
+    public void setOwnLocation(LatLng location) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("initial", initialStart);
+        editor.putFloat("ownLocationLatitude", (float) location.latitude);
+        editor.putFloat("ownLocationLongitude", (float) location.longitude);
 
         editor.commit();
     }
