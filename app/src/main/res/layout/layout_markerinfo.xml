@@ -64,6 +64,9 @@
             android:paddingRight="16dp" />
     </RelativeLayout>
 
+    <View
+        style="@style/Divider" />
+
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
