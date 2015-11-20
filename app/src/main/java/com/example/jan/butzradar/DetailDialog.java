@@ -35,7 +35,7 @@ public class DetailDialog extends DialogFragment {
 
         List<Address> addressList = reverseGeocoder.getAddressFromLocation(new LatLng(locationEntry.latitude, locationEntry.longitude));
 
-        if (addressList != null && addressList.size() > 0 && addressList.get(0).getMaxAddressLineIndex() > 1) {
+        if (addressList != null && addressList.size() > 0 && addressList.get(0).getMaxAddressLineIndex() > 0) {
             String addressText = addressList.get(0).getAddressLine(0);
             String addressSubText = addressList.get(0).getAddressLine(1);
 
