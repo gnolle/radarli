@@ -76,6 +76,63 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/travelIcon"
+            android:src="@drawable/ic_directions_car_black_24dp"
+            android:alpha="0.38"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/travelText"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:textColor="#000000"
+            android:alpha="0.87"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:text="1 Stunde, 15 Minuten"
+            android:paddingLeft="72dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="2dp"
+            android:textIsSelectable="false"
+            android:paddingRight="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/travelText"
+            android:id="@+id/travelSubtext"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:textColor="#000000"
+            android:alpha="0.57"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:text="90,0 km"
+            android:paddingBottom="20dp"
+            android:paddingLeft="72dp"
+            android:textIsSelectable="false"
+            android:paddingRight="16dp" />
+    </RelativeLayout>
+
+    <View
+        style="@style/Divider" />
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/updateIcon"
             android:src="@drawable/ic_access_time_black_24dp"
             android:alpha="0.38"
