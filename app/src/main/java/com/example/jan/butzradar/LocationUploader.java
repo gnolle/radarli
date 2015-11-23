@@ -66,14 +66,23 @@ public class LocationUploader extends IntentService {
 
         } catch (Exception exc) {
             Log.e(CLASS_ID, "Error uploading location to server.");
+        } finally {
+            releaseWakelock();
+            Log.i("WAKE_LOCK", "Released wakelock");
         }
 
     }
 
+    private void releaseWakelock() {
+        if (RadarliWakeLock.wakeLock != null) {
+            RadarliWakeLock.wakeLock.release();
+            RadarliWakeLock.wakeLock = null;
+        }
+    }
+
     private long getCurrentTimestamp() {
         Calendar calender = Calendar.getInstance();
-        long timestamp =  calender.getTimeInMillis();
-        return timestamp;
+        return calender.getTimeInMillis();
     }
 
 }

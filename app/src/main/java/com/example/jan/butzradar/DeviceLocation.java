@@ -1,6 +1,6 @@
 package com.example.jan.butzradar;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -13,12 +13,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 
-/**
- * Created by Jan on 08.11.2015.
- */
-public class DeviceLocation extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class DeviceLocation extends IntentService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private final static String CLASS_ID = "DEVICE_LOCATION";
     private final static float GPS_ACCURACY_THRESHOLD = 100.0f;
@@ -26,16 +22,23 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
+    private Intent intent;
     private boolean currentlyPositioning = false;
     private int numberOfLocationUpdates = 0;
+
+    public DeviceLocation() {
+        super("DeviceLocation");
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
 
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    @Override
+    protected void onHandleIntent(Intent intent) {
         Log.i(CLASS_ID, "DeviceLocation service started.");
+        this.intent = intent;
 
         buildGoogleApiClient();
         createLocationRequest();
@@ -44,8 +47,6 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
             currentlyPositioning = true;
             startPositioning();
         }
-
-        return START_NOT_STICKY;
     }
 
     private void startPositioning() {
@@ -102,7 +103,6 @@ public class DeviceLocation extends Service implements GoogleApiClient.Connectio
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
             mGoogleApiClient.disconnect();
         }
-        stopSelf();
     }
 
     private void startUploading(Location location) {
