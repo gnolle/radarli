@@ -9,130 +9,6 @@
     android:paddingBottom="8dp">
 
     <RelativeLayout
-        android:id="@+id/locationContainer"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/material_white">
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/locationIcon"
-            android:src="@drawable/ic_public_black_24dp"
-            android:alpha="0.38"
-            android:layout_marginLeft="16dp"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/locationInfo"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:textColor="#000000"
-            android:alpha="0.87"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif"
-            android:text="Friedrichstraße 112"
-            android:paddingLeft="72dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="2dp"
-            android:textIsSelectable="false"
-            android:paddingRight="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/locationInfo"
-            android:id="@+id/locationInfoSubtext"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:textColor="#000000"
-            android:alpha="0.57"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif"
-            android:text="38855 Wernigerode"
-            android:paddingBottom="20dp"
-            android:paddingLeft="72dp"
-            android:textIsSelectable="false"
-            android:paddingRight="16dp" />
-
-        <View
-            android:layout_below="@id/locationInfoSubtext"
-            style="@style/Divider"
-            android:layout_marginLeft="72dp" />
-
-    </RelativeLayout>
-
-
-
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/material_white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/travelIcon"
-            android:src="@drawable/ic_directions_car_black_24dp"
-            android:alpha="0.38"
-            android:layout_marginLeft="16dp"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/travelText"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:textColor="#000000"
-            android:alpha="0.87"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif"
-            android:text="1 Stunde, 15 Minuten"
-            android:paddingLeft="72dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="2dp"
-            android:textIsSelectable="false"
-            android:paddingRight="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/travelText"
-            android:id="@+id/travelSubtext"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:textColor="#000000"
-            android:alpha="0.57"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif"
-            android:text="90,0 km"
-            android:paddingBottom="20dp"
-            android:paddingLeft="72dp"
-            android:textIsSelectable="false"
-            android:paddingRight="16dp" />
-
-        <View
-            style="@style/Divider"
-            android:layout_below="@id/travelSubtext"
-            android:layout_marginLeft="72dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -184,6 +60,138 @@
             android:paddingLeft="72dp"
             android:textIsSelectable="false"
             android:paddingRight="16dp" />
+
+        <View
+            android:layout_below="@id/updateSubtext"
+            style="@style/Divider"
+            android:layout_marginLeft="72dp" />
+
     </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_white">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationIcon"
+            android:src="@drawable/ic_public_black_24dp"
+            android:alpha="0.38"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationInfo"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:textColor="#000000"
+            android:alpha="0.87"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:text="Friedrichstraße 112"
+            android:paddingLeft="72dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="2dp"
+            android:textIsSelectable="false"
+            android:paddingRight="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/locationInfo"
+            android:id="@+id/locationInfoSubtext"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:textColor="#000000"
+            android:alpha="0.57"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:text="38855 Wernigerode"
+            android:paddingBottom="20dp"
+            android:paddingLeft="72dp"
+            android:textIsSelectable="false"
+            android:paddingRight="16dp" />
+
+        <View
+            style="@style/Divider"
+            android:layout_below="@id/locationInfoSubtext"
+            android:layout_marginLeft="72dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/locationContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_white">
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/material_white">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/travelIcon"
+                android:src="@drawable/ic_directions_car_black_24dp"
+                android:alpha="0.38"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/travelText"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:textColor="#000000"
+                android:alpha="0.87"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:text="1 Stunde, 15 Minuten"
+                android:paddingLeft="72dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="2dp"
+                android:textIsSelectable="false"
+                android:paddingRight="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/travelText"
+                android:id="@+id/travelSubtext"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:textColor="#000000"
+                android:alpha="0.57"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:text="90,0 km"
+                android:paddingBottom="20dp"
+                android:paddingLeft="72dp"
+                android:textIsSelectable="false"
+                android:paddingRight="16dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>
