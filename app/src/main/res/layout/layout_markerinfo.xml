@@ -65,7 +65,8 @@
 
         <View
             android:layout_below="@id/locationInfoSubtext"
-            style="@style/Divider" />
+            style="@style/Divider"
+            android:layout_marginLeft="72dp" />
 
     </RelativeLayout>
 
@@ -126,7 +127,8 @@
 
         <View
             style="@style/Divider"
-            android:layout_below="@id/travelSubtext"/>
+            android:layout_below="@id/travelSubtext"
+            android:layout_marginLeft="72dp" />
 
     </RelativeLayout>
 
