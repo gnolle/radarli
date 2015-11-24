@@ -74,6 +74,8 @@ public class DistanceCalculator extends AsyncTask<Void, Void, DistanceResult> {
 
             serverResponse = response.toString();
 
+            Log.i(CLASS_ID, serverResponse);
+
             br.close();
             connection.disconnect();
         }
@@ -89,6 +91,8 @@ public class DistanceCalculator extends AsyncTask<Void, Void, DistanceResult> {
         callURL.append("&destinations=");
         callURL.append(String.valueOf(destination.latitude) + "," + String.valueOf(destination.longitude));
         callURL.append("&language=de-DE");
+        callURL.append("&departure_time=now");
+        callURL.append("&key=" + detailDialog.getResources().getString(R.string.gmaps_server_key));
 
         return callURL.toString();
     }
@@ -107,7 +111,7 @@ public class DistanceCalculator extends AsyncTask<Void, Void, DistanceResult> {
             JSONObject distance = firstElement.getJSONObject("distance");
             String distanceText = distance.getString("text");
 
-            JSONObject duration = firstElement.getJSONObject("duration");
+            JSONObject duration = firstElement.getJSONObject("duration_in_traffic");
             String durationText = duration.getString("text");
 
             distanceResult = new DistanceResult(distanceText, durationText);
