@@ -17,6 +17,7 @@ import java.util.List;
 public class DetailDialog extends DialogFragment {
 
     private LocationEntry locationEntry;
+    private View dialogView;
 
     public void setLocationEntry(LocationEntry locationEntry) {
         this.locationEntry = locationEntry;
@@ -29,12 +30,33 @@ public class DetailDialog extends DialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View dialogView = inflater.inflate(R.layout.layout_markerinfo, null);
+        dialogView = inflater.inflate(R.layout.layout_markerinfo, null);
 
-        ReverseGeocoder reverseGeocoder = new ReverseGeocoder(getActivity());
+        showTimePanel();
 
-        List<Address> addressList = reverseGeocoder.getAddressFromLocation(new LatLng(locationEntry.latitude, locationEntry.longitude));
+        startGeocoding();
 
+        builder.setView(dialogView);
+
+        return builder.create();
+    }
+
+    private void showTimePanel() {
+        DateFormatter dateFormatter = new DateFormatter(locationEntry.timestamp);
+
+        TextView timeTextView = (TextView) dialogView.findViewById(R.id.updateText);
+        timeTextView.setText(dateFormatter.parsedTime);
+
+        TextView timeSubtextView = (TextView) dialogView.findViewById(R.id.updateSubtext);
+        timeSubtextView.setText(dateFormatter.parsedDate);
+    }
+
+    private void startGeocoding() {
+        ReverseGeocoder reverseGeocoder = new ReverseGeocoder(getActivity(), this);
+        reverseGeocoder.execute(new LatLng(locationEntry.latitude, locationEntry.longitude));
+    }
+
+    public void showGeocodingResult(List<Address> addressList) {
         if (addressList != null && addressList.size() > 0 && addressList.get(0).getMaxAddressLineIndex() > 0) {
             String addressText = addressList.get(0).getAddressLine(0);
             String addressSubText = addressList.get(0).getAddressLine(1);
@@ -48,19 +70,6 @@ public class DetailDialog extends DialogFragment {
             View locationContainer = dialogView.findViewById(R.id.locationContainer);
             locationContainer.setVisibility(View.GONE);
         }
-
-
-        DateFormatter dateFormatter = new DateFormatter(locationEntry.timestamp);
-
-        TextView timeTextView = (TextView) dialogView.findViewById(R.id.updateText);
-        timeTextView.setText(dateFormatter.parsedTime);
-
-        TextView timeSubtextView = (TextView) dialogView.findViewById(R.id.updateSubtext);
-        timeSubtextView.setText(dateFormatter.parsedDate);
-
-        builder.setView(dialogView);
-
-        return builder.create();
     }
 
     @Override

@@ -61,11 +61,6 @@
             android:textIsSelectable="false"
             android:paddingRight="16dp" />
 
-        <View
-            android:layout_below="@id/updateSubtext"
-            style="@style/Divider"
-            android:layout_marginLeft="72dp" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -73,6 +68,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/material_white">
+
+        <View
+            style="@style/Divider"
+            android:layout_marginLeft="72dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -121,11 +120,6 @@
             android:textIsSelectable="false"
             android:paddingRight="16dp" />
 
-        <View
-            style="@style/Divider"
-            android:layout_below="@id/locationInfoSubtext"
-            android:layout_marginLeft="72dp" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -140,6 +134,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/material_white">
+
+            <View
+                style="@style/Divider"
+                android:layout_marginLeft="72dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
