@@ -32,9 +32,13 @@ public class DetailDialog extends DialogFragment {
 
         dialogView = inflater.inflate(R.layout.layout_markerinfo, null);
 
+        hideDynamicPanels();
+
         showTimePanel();
 
         startGeocoding();
+
+        startDistanceCalculator();
 
         builder.setView(dialogView);
 
@@ -56,6 +60,13 @@ public class DetailDialog extends DialogFragment {
         reverseGeocoder.execute(new LatLng(locationEntry.latitude, locationEntry.longitude));
     }
 
+    private void startDistanceCalculator() {
+        RadarSharedPreferences radarSharedPreferences = new RadarSharedPreferences(getActivity());
+
+        DistanceCalculator distanceCalculator = new DistanceCalculator(radarSharedPreferences.getOwnLocation(), new LatLng(locationEntry.latitude, locationEntry.longitude), this);
+        distanceCalculator.execute();
+    }
+
     public void showGeocodingResult(List<Address> addressList) {
         if (addressList != null && addressList.size() > 0 && addressList.get(0).getMaxAddressLineIndex() > 0) {
             String addressText = addressList.get(0).getAddressLine(0);
@@ -66,10 +77,38 @@ public class DetailDialog extends DialogFragment {
 
             TextView locationSubtextView = (TextView) dialogView.findViewById(R.id.locationInfoSubtext);
             locationSubtextView.setText(addressSubText);
-        } else {
-            View locationContainer = dialogView.findViewById(R.id.locationContainer);
-            locationContainer.setVisibility(View.GONE);
+
+            showGeocodingPanel();
         }
+    }
+
+    public void showDistanceResult(DistanceResult distanceResult) {
+
+        TextView travelText = (TextView) dialogView.findViewById(R.id.travelText);
+        travelText.setText(distanceResult.travelTime);
+
+        TextView travelSubtext = (TextView) dialogView.findViewById(R.id.travelSubtext);
+        travelSubtext.setText(distanceResult.distance);
+
+        showDistancePanel();
+    }
+
+    private void showGeocodingPanel() {
+        View geocoderContainer = dialogView.findViewById(R.id.geocoderContainer);
+        geocoderContainer.setVisibility(View.VISIBLE);
+    }
+
+    private void showDistancePanel() {
+        View distanceContainer = dialogView.findViewById(R.id.distanceContainer);
+        distanceContainer.setVisibility(View.VISIBLE);
+    }
+
+    private void hideDynamicPanels() {
+        View geocoderContainer = dialogView.findViewById(R.id.geocoderContainer);
+        geocoderContainer.setVisibility(View.GONE);
+
+        View distanceContainer = dialogView.findViewById(R.id.distanceContainer);
+        distanceContainer.setVisibility(View.GONE);
     }
 
     @Override

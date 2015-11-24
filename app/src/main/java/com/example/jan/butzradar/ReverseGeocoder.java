@@ -19,6 +19,8 @@ public class ReverseGeocoder extends AsyncTask<LatLng, Void, List<Address>> {
     private Geocoder geocoder;
 
     public ReverseGeocoder(Context context, DetailDialog detailDialog) {
+        super();
+
         this.detailDialog = detailDialog;
         geocoder = new Geocoder(context, Locale.getDefault());
     }

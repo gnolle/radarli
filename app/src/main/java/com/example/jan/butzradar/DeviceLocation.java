@@ -13,6 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 public class DeviceLocation extends IntentService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -93,6 +94,8 @@ public class DeviceLocation extends IntentService implements GoogleApiClient.Con
         numberOfLocationUpdates++;
 
         if (location.getAccuracy() < GPS_ACCURACY_THRESHOLD || numberOfLocationUpdates >= MAX_LOCATION_UPDATES) {
+            RadarSharedPreferences radarSharedPreferences = new RadarSharedPreferences(this);
+            radarSharedPreferences.setOwnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
             startUploading(location);
             stopLocationUpdates();
         }
