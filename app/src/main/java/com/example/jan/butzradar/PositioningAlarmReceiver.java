@@ -14,7 +14,7 @@ public class PositioningAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        acquireWakeLock(context);
+        acquireWakeLock(context.getApplicationContext());
         context.startService(new Intent(context, DeviceLocation.class));
     }
 
