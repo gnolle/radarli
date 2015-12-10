@@ -73,7 +73,9 @@ public class LocationUploader extends IntentService {
             if (out != null) {
                 try {
                     out.close();
-                } catch (IOException e) {}
+                } catch (IOException e) {
+                    Log.i(CLASS_ID, "Could not close output stream.");
+                }
             }
 
             if (urlConnection != null) {
