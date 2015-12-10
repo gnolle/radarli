@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -18,14 +19,18 @@ import com.google.android.gms.maps.model.LatLng;
 public class DeviceLocation extends IntentService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private final static String CLASS_ID = "DEVICE_LOCATION";
-    private final static float GPS_ACCURACY_THRESHOLD = 100.0f;
+    private final static float GPS_ACCURACY_THRESHOLD = 15.0f;
     private final static int MAX_LOCATION_UPDATES = 5;
+    private final static long LOCATION_TIMEOUT = 10000;
+    private final static long LOCATION_TIMEOUT_TICKS = 1000;
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Intent intent;
     private boolean currentlyPositioning = false;
     private int numberOfLocationUpdates = 0;
+    private Location mostAccuratePosition;
+    private CountDownTimer countDownTimer;
 
     public DeviceLocation() {
         super("DeviceLocation");
@@ -86,6 +91,19 @@ public class DeviceLocation extends IntentService implements GoogleApiClient.Con
         Log.i(CLASS_ID, "Connected to Google API.");
 
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        countDownTimer = new CountDownTimer(LOCATION_TIMEOUT, LOCATION_TIMEOUT_TICKS) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Log.i(CLASS_ID, "Seconds remaining for positioning: " + millisUntilFinished / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                Log.i(CLASS_ID, "Positioning timeout.");
+                finishPositioning();
+            }
+        };
+        countDownTimer.start();
     }
 
     @Override
@@ -93,12 +111,23 @@ public class DeviceLocation extends IntentService implements GoogleApiClient.Con
         Log.i(CLASS_ID, "Location changed. " + location.toString());
         numberOfLocationUpdates++;
 
-        if (location.getAccuracy() < GPS_ACCURACY_THRESHOLD || numberOfLocationUpdates >= MAX_LOCATION_UPDATES) {
-            RadarSharedPreferences radarSharedPreferences = new RadarSharedPreferences(this);
-            radarSharedPreferences.setOwnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
-            startUploading(location);
-            stopLocationUpdates();
+        if (mostAccuratePosition == null || mostAccuratePosition.getAccuracy() <= location.getAccuracy()) {
+            mostAccuratePosition = location;
         }
+
+        if (mostAccuratePosition.getAccuracy() < GPS_ACCURACY_THRESHOLD || numberOfLocationUpdates >= MAX_LOCATION_UPDATES) {
+            countDownTimer.cancel();
+            finishPositioning();
+        }
+    }
+
+    private void finishPositioning() {
+        if (mostAccuratePosition != null) {
+            RadarSharedPreferences radarSharedPreferences = new RadarSharedPreferences(this);
+            radarSharedPreferences.setOwnLocation(new LatLng(mostAccuratePosition.getLatitude(), mostAccuratePosition.getLongitude()));
+            startUploading(mostAccuratePosition);
+        }
+        stopLocationUpdates();
     }
 
     private void stopLocationUpdates() {
