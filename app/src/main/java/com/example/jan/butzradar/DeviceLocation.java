@@ -19,7 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class DeviceLocation extends IntentService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private final static String CLASS_ID = "DEVICE_LOCATION";
-    private final static float GPS_ACCURACY_THRESHOLD = 15.0f;
+    private final static float GPS_ACCURACY_THRESHOLD = 100.0f;
     private final static int MAX_LOCATION_UPDATES = 5;
     private final static long LOCATION_TIMEOUT = 10000;
     private final static long LOCATION_TIMEOUT_TICKS = 1000;
