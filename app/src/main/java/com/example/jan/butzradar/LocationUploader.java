@@ -10,6 +10,7 @@ import android.util.Log;
 import com.google.android.gms.location.FusedLocationProviderApi;
 
 
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -37,19 +38,20 @@ public class LocationUploader extends IntentService {
 
         LocationEntry locationEntry = new LocationEntry(getResources().getString(R.string.user_id), getCurrentTimestamp(), location.getLatitude(), location.getLongitude(), getResources().getInteger(R.integer.marker_color), location.getAccuracy());
 
+        HttpURLConnection urlConnection = null;
+        OutputStreamWriter out = null;
+
         try {
 
             URL url = new URL(getResources().getString(R.string.server_url));
 
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection = (HttpURLConnection) url.openConnection();
 
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            urlConnection.setConnectTimeout(10000);
-            urlConnection.setReadTimeout(10000);
-
-            Log.i(CLASS_ID, urlConnection.getConnectTimeout() + ", " + urlConnection.getReadTimeout());
+            urlConnection.setConnectTimeout(15000);
+            urlConnection.setReadTimeout(15000);
 
             String postParameters = locationEntry.getPostData();
 
@@ -57,18 +59,27 @@ public class LocationUploader extends IntentService {
 
             urlConnection.setFixedLengthStreamingMode(postParameters.getBytes().length);
 
-            OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8");
+            out = new OutputStreamWriter(urlConnection.getOutputStream(), "UTF-8");
             out.write(postParameters);
             out.flush();
-            out.close();
-
-            urlConnection.disconnect();
 
         } catch (Exception exc) {
             Log.e(CLASS_ID, "Error uploading location to server.");
         } finally {
+
             releaseWakelock();
             Log.i("WAKE_LOCK", "Released wakelock");
+
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {}
+            }
+
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+
         }
 
     }
