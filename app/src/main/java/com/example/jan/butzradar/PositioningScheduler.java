@@ -14,7 +14,7 @@ public class PositioningScheduler {
 
     private final static String CLASS_ID = "POSITIONING_SCHEDULER";
 
-    private static final int POSITIONING_FREQUENCY = 60000;
+    private static final int POSITIONING_FREQUENCY = 120000;
 
     private Context context;
 

@@ -7,6 +7,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -31,20 +32,24 @@ public class LocationPoller extends IntentService {
     }
 
     private void startDownloading() {
+
+        HttpURLConnection urlConnection = null;
+        BufferedReader bufferedReader = null;
+
         try {
             URL url = new URL("http://www.lolnice.de/butzi_finder/locations.json");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Connection", "close");
-            connection.setConnectTimeout(10000);
-            connection.setReadTimeout(10000);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setUseCaches(false);
+            urlConnection.setRequestProperty("Connection", "close");
+            urlConnection.setConnectTimeout(10000);
+            urlConnection.setReadTimeout(10000);
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             String readLine;
 
             StringBuilder response = new StringBuilder();
-            while ((readLine = br.readLine()) != null) {
+            while ((readLine = bufferedReader.readLine()) != null) {
                 response.append(readLine);
             }
 
@@ -52,11 +57,21 @@ public class LocationPoller extends IntentService {
 
             broadcastNewServerLocations(response.toString());
 
-            br.close();
-            connection.disconnect();
         }
         catch (Exception exc) {
             Log.e(CLASS_ID, "Error polling server.");
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    Log.i(CLASS_ID, "Could not close buffered reader.");
+                }
+            }
+
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
         }
     }
 

@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -55,20 +56,24 @@ public class DistanceCalculator extends AsyncTask<Void, Void, DistanceResult> {
     }
 
     private void getDistance() {
+
+        HttpURLConnection urlConnection = null;
+        BufferedReader bufferedReader = null;
+
         try {
             URL url = new URL(buildAPICall());
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Connection", "close");
-            connection.setConnectTimeout(10000);
-            connection.setReadTimeout(10000);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setUseCaches(false);
+            urlConnection.setRequestProperty("Connection", "close");
+            urlConnection.setConnectTimeout(10000);
+            urlConnection.setReadTimeout(10000);
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             String readLine;
 
             StringBuilder response = new StringBuilder();
-            while ((readLine = br.readLine()) != null) {
+            while ((readLine = bufferedReader.readLine()) != null) {
                 response.append(readLine);
             }
 
@@ -76,11 +81,21 @@ public class DistanceCalculator extends AsyncTask<Void, Void, DistanceResult> {
 
             Log.i(CLASS_ID, serverResponse);
 
-            br.close();
-            connection.disconnect();
         }
         catch (Exception exc) {
            Log.e(CLASS_ID, exc.getMessage());
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    Log.i(CLASS_ID, "Could not close buffered reader.");
+                }
+            }
+
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
         }
     }
 
