@@ -18,7 +18,7 @@ import java.util.Calendar;
 
 public class LocationUploader extends IntentService {
 
-    private final static String CLASS_ID = "LOCATION UPLOADER";
+    private final static String CLASS_ID = "LOCATION_UPLOADER";
 
     public LocationUploader() {
         super("LocationUploader");
@@ -43,6 +43,8 @@ public class LocationUploader extends IntentService {
 
         try {
 
+            Log.i(CLASS_ID, "Uploading to server...");
+
             URL url = new URL(getResources().getString(R.string.server_url));
 
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -64,7 +66,7 @@ public class LocationUploader extends IntentService {
             out.flush();
 
         } catch (Exception exc) {
-            Log.e(CLASS_ID, "Error uploading location to server.");
+            Log.e(CLASS_ID, "Error uploading location to server. Message: " + exc.getMessage());
         } finally {
 
             releaseWakelock();
