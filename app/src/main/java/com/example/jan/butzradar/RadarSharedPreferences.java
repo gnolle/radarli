@@ -1,34 +1,18 @@
 package com.example.jan.butzradar;
 
-/**
- * Created by Jan on 09.11.2015.
- */
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Camera;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-/**
- * Created by janklostermann on 09.11.15.
- */
 public class RadarSharedPreferences {
 
-private static final String CLASS_ID = "PREFS";
     private static final String PREFS_NAME = "RadarliPrefs";
     private Context context;
 
     public RadarSharedPreferences(Context context) {
         this.context = context;
-    }
-
-    public boolean isOwnLocationAvailable() {
-        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
-        boolean ownLocationAvailable = settings.getBoolean("ownLocationAvailable", true);
-
-        return ownLocationAvailable;
     }
 
     public LatLng getOwnLocation() {
@@ -45,7 +29,7 @@ private static final String CLASS_ID = "PREFS";
         editor.putFloat("ownLocationLatitude", (float) location.latitude);
         editor.putFloat("ownLocationLongitude", (float) location.longitude);
 
-        editor.commit();
+        editor.apply();
     }
 
     public boolean getPositioningSetting() {
@@ -60,7 +44,7 @@ private static final String CLASS_ID = "PREFS";
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("positioning", positioningSetting);
 
-        editor.commit();
+        editor.apply();
     }
 
     public CameraPosition getLastCameraPos() {
@@ -87,7 +71,7 @@ private static final String CLASS_ID = "PREFS";
         editor.putFloat("camera_tilt", cameraPosition.tilt);
         editor.putFloat("camera_zoom", cameraPosition.zoom);
 
-        editor.commit();
+        editor.apply();
     }
 
     public boolean isLastCameraPosSet() {

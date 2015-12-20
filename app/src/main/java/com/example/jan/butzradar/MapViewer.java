@@ -1,9 +1,6 @@
 package com.example.jan.butzradar;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -26,9 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Jan on 01.10.2015.
- */
 public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private final static String CLASS_ID = "MAP_VIEWER";
@@ -239,7 +233,7 @@ public class MapViewer implements OnMapReadyCallback, GoogleMap.OnMarkerClickLis
         }
     }
 
-    public void focusCameraOnCameraPosition(CameraPosition cameraPosition) {
+    private void focusCameraOnCameraPosition(CameraPosition cameraPosition) {
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 

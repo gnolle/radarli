@@ -26,7 +26,6 @@ public class DeviceLocation extends IntentService implements GoogleApiClient.Con
 
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
-    private Intent intent;
     private boolean currentlyPositioning = false;
     private int numberOfLocationUpdates = 0;
     private Location mostAccuratePosition;
@@ -44,7 +43,6 @@ public class DeviceLocation extends IntentService implements GoogleApiClient.Con
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.i(CLASS_ID, "DeviceLocation service started.");
-        this.intent = intent;
 
         buildGoogleApiClient();
         createLocationRequest();

@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
 
-/**
- * Created by Jan on 08.11.2015.
- */
 public class PositioningScheduler {
 
     private final static String CLASS_ID = "POSITIONING_SCHEDULER";

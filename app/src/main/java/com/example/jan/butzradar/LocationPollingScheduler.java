@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
 
-/**
- * Created by Jan on 22.10.2015.
- */
 public class LocationPollingScheduler {
 
     private final static String CLASS_ID = "LOCATION_SCHEDULER";
 
-    private static final int LOCATION_POLLING_FREQUENCY = 30000;
+    private static final int LOCATION_POLLING_FREQUENCY = 60000;
 
     private Context context;
 

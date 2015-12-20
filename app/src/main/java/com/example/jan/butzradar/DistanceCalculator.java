@@ -2,9 +2,7 @@ package com.example.jan.butzradar;
 
 //import android.util.Log;
 
-import android.location.Address;
 import android.os.AsyncTask;
-import android.util.JsonReader;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -15,15 +13,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.List;
 
-/**
- * Created by janklostermann on 20.11.15.
- */
 public class DistanceCalculator extends AsyncTask<Void, Void, DistanceResult> {
 
     private static final String CLASS_ID = "DISTANCE";
@@ -102,12 +94,17 @@ public class DistanceCalculator extends AsyncTask<Void, Void, DistanceResult> {
     private String buildAPICall() {
         StringBuilder callURL = new StringBuilder();
         callURL.append("https://maps.googleapis.com/maps/api/distancematrix/json?origins=");
-        callURL.append(String.valueOf(origin.latitude) + "," + String.valueOf(origin.longitude));
+        callURL.append(String.valueOf(origin.latitude));
+        callURL.append(",");
+        callURL.append(String.valueOf(origin.longitude));
         callURL.append("&destinations=");
-        callURL.append(String.valueOf(destination.latitude) + "," + String.valueOf(destination.longitude));
+        callURL.append(String.valueOf(destination.latitude));
+        callURL.append(",");
+        callURL.append(String.valueOf(destination.longitude));
         callURL.append("&language=de-DE");
         callURL.append("&departure_time=now");
-        callURL.append("&key=" + detailDialog.getResources().getString(R.string.gmaps_server_key));
+        callURL.append("&key=");
+        callURL.append(detailDialog.getResources().getString(R.string.gmaps_server_key));
 
         return callURL.toString();
     }

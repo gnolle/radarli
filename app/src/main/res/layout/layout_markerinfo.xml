@@ -69,7 +69,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/material_white">
+        android:background="@color/material_white"
+        android:animateLayoutChanges="true">
 
         <RelativeLayout
             android:orientation="vertical"
@@ -134,7 +135,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/material_white">
+        android:background="@color/material_white"
+        android:animateLayoutChanges="true">
 
         <RelativeLayout
             android:orientation="vertical"

@@ -2,9 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:butzradar="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/pic_viewer"
+        android:icon="@drawable/ic_favorite_white_24dp"
+        android:title="Show pic"
+        butzradar:showAsAction="ifRoom"/>
+
     <item android:id="@+id/location_toggle"
         android:icon="@drawable/ic_location_on_white_24dp"
         android:title="Toggle positioning"
-        butzradar:showAsAction="always"/>
+        butzradar:showAsAction="ifRoom"/>
 
 </menu>

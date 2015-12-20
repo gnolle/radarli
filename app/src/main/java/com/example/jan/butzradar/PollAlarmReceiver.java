@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-/**
- * Created by Jan on 06.10.2015.
- */
 public class PollAlarmReceiver extends BroadcastReceiver {
 
     private final static String CLASS_ID = "ALARM_RECEIVER";

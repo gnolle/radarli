@@ -3,9 +3,6 @@ package com.example.jan.butzradar;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-/**
- * Created by Jan on 05.10.2015.
- */
 public class LocationEntry {
 
     public String userid;
@@ -55,7 +52,7 @@ public class LocationEntry {
         return postData.toString();
     }
 
-    public String encodeToURIFormat(String toEncode) {
+    private String encodeToURIFormat(String toEncode) {
 
         try {
             return URLEncoder.encode(toEncode, "UTF-8");

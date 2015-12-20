@@ -97,11 +97,6 @@ public class ButzRadar extends AppCompatActivity {
         }
     }
 
-    private boolean positioningIsActive() {
-        SharedPreferences settings = getPreferences(0);
-        return settings.getBoolean("positioningActive", true);
-    }
-
     public void startLocationPolling() {
         locationPollingScheduler = new LocationPollingScheduler(this);
         locationPollingScheduler.startPollingAlarm();

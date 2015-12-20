@@ -7,8 +7,6 @@ import android.location.Location;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.google.android.gms.location.FusedLocationProviderApi;
-
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
