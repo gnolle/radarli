@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.schedule;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+
+import com.example.jan.butzradar.ButzRadar;
+import com.example.jan.butzradar.location.JSONParser;
 
 
 public class ServerLocationUpdateReceiver extends BroadcastReceiver {

@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.schedule;
 
 import android.os.PowerManager;
 

@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.location;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.location.Location;
 import android.os.IBinder;
 import android.util.Log;
 
+
+import com.example.jan.butzradar.R;
+import com.example.jan.butzradar.schedule.RadarliWakeLock;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;

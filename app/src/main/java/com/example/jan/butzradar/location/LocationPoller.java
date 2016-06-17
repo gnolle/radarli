@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.location;
 
 import android.app.IntentService;
 import android.content.Intent;

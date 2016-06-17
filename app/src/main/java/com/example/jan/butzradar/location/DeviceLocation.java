@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.location;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.jan.butzradar.preferences.RadarSharedPreferences;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -27,7 +28,7 @@ public class DeviceLocation extends IntentService implements GoogleApiClient.Con
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private boolean currentlyPositioning = false;
-    private int numberOfLocationUpdates = 0;
+    private int numberOfLocationUpdates;
     private Location mostAccuratePosition;
     private CountDownTimer countDownTimer;
 

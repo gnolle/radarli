@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.utils;
 
 import android.support.design.widget.Snackbar;
 import android.view.View;

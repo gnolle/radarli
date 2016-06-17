@@ -1,10 +1,13 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.ui;
 
 import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.example.jan.butzradar.ButzRadar;
+import com.example.jan.butzradar.R;
+import com.example.jan.butzradar.location.LocationEntry;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;

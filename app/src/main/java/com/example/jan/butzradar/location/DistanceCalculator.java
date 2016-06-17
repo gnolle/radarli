@@ -1,10 +1,12 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.location;
 
 //import android.util.Log;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.jan.butzradar.ui.DetailDialog;
+import com.example.jan.butzradar.R;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;

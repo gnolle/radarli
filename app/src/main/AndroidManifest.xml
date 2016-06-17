@@ -23,23 +23,23 @@
             android:value="@string/gmaps_api_key" />
 
         <service
-            android:name=".DeviceLocation">
+            android:name=".location.DeviceLocation">
         </service>
 
         <service
-            android:name=".LocationUploader">
+            android:name=".location.LocationUploader">
         </service>
 
         <service
-            android:name=".LocationPoller">
+            android:name=".location.LocationPoller">
         </service>
 
         <receiver
-            android:name=".PollAlarmReceiver">
+            android:name=".schedule.PollAlarmReceiver">
         </receiver>
 
         <receiver
-            android:name=".PositioningAlarmReceiver">
+            android:name=".schedule.PositioningAlarmReceiver">
         </receiver>
 
         <activity

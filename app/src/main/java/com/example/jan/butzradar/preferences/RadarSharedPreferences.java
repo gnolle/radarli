@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;

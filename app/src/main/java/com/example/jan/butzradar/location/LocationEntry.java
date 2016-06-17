@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.location;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

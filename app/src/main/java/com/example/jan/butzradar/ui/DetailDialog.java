@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.ui;
 
 import android.app.Dialog;
 import android.location.Address;
@@ -10,6 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.jan.butzradar.R;
+import com.example.jan.butzradar.preferences.RadarSharedPreferences;
+import com.example.jan.butzradar.location.DistanceCalculator;
+import com.example.jan.butzradar.location.DistanceResult;
+import com.example.jan.butzradar.location.LocationEntry;
+import com.example.jan.butzradar.location.ReverseGeocoder;
+import com.example.jan.butzradar.utils.DateFormatter;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;

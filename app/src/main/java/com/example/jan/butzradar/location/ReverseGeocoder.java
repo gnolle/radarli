@@ -1,4 +1,4 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.location;
 
 import android.content.Context;
 import android.location.Address;
@@ -6,6 +6,7 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.jan.butzradar.ui.DetailDialog;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;

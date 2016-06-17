@@ -1,7 +1,6 @@
 package com.example.jan.butzradar;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +9,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.example.jan.butzradar.preferences.RadarSharedPreferences;
+import com.example.jan.butzradar.schedule.PositioningScheduler;
+import com.example.jan.butzradar.schedule.ServerLocationUpdateReceiver;
+import com.example.jan.butzradar.location.LocationEntry;
+import com.example.jan.butzradar.location.LocationPoller;
+import com.example.jan.butzradar.location.LocationPollingScheduler;
+import com.example.jan.butzradar.ui.MapViewer;
+import com.example.jan.butzradar.utils.SnackBarBuilder;
 
 public class ButzRadar extends AppCompatActivity {
 

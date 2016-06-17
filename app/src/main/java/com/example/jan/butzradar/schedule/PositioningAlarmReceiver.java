@@ -1,10 +1,12 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.schedule;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.util.Log;
+
+import com.example.jan.butzradar.location.DeviceLocation;
 
 public class PositioningAlarmReceiver extends BroadcastReceiver {
 

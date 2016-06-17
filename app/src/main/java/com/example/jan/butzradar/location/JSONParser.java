@@ -1,5 +1,6 @@
-package com.example.jan.butzradar;
+package com.example.jan.butzradar.location;
 
+import com.example.jan.butzradar.location.LocationEntry;
 import com.google.gson.Gson;
 
 public class JSONParser {
